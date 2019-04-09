@@ -1,0 +1,3 @@
+com/everday/tinker/MainActivity.class
+com/everday/tinker/BaseActivity.class
+com/everday/tinker/BaseApplication.class
