@@ -8,33 +8,44 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        //开启分包
-        multiDexEnabled true
-        //设置分包配置
-        multiDexKeepFile file('multidex-config.txt')
+//        //开启分包
+//        multiDexEnabled true
+//        //设置分包配置
+//        multiDexKeepFile file('multidex-config.txt')
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs{
+        release{
+            keyAlias 'android'
+            keyPassword '123456'
+            storeFile file('D:\\project\\Tinker\\app\\laowu.keystore')
+            storePassword '123456'
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
-    dexOptions{
-        javaMaxHeapSize "4g"
-        preDexLibraries = false
-        additionalParameters = [ //配置multidex参数
-                '--multi-dex',  //多dex分包
-                '--set-max-idx-number=50000', //每个包内方法数上限
-                '--main-dex-list='+'/multidex-config.txt',//打包到主classes.dex文件列表
-                '--minimal-main-dex'
-        ]
-    }
+//    dexOptions{
+//        javaMaxHeapSize "4g"
+//        preDexLibraries = false
+//        additionalParameters = [ //配置multidex参数
+//                '--multi-dex',  //多dex分包
+//                '--set-max-idx-number=50000', //每个包内方法数上限
+//                '--main-dex-list='+'/multidex-config.txt',//打包到主classes.dex文件列表
+//                '--minimal-main-dex'
+//        ]
+//    }
 }
 
 dependencies {
